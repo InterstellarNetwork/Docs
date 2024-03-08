@@ -1,0 +1,131 @@
+---
+title: Server Installation
+description: 'Welcome to our official documentation!'
+---
+
+## Getting started
+
+Learn how to host the site on your server and and deploy it to the public.
+
+Please ensure you have all prerequisites installed.
+<AccordionGroup>
+  <Accordion icon="rectangle-terminal" title="Installing Git">
+
+```bash apt
+sudo apt update
+```
+``` bash apt 
+sudo apt install git
+```
+Ensure that git has been installed 
+```bash git 
+git --version
+```
+  </Accordion>
+    <Accordion icon="rectangle-terminal" title="Installing Node">
+    ```bash curl
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&\ apt-get install -y nodejs
+    ```
+    If the command fails run the following:
+    ```bash apt
+    apt-get install nodejs -y
+    ```
+
+</Accordion>
+  <Accordion icon="rectangle-terminal" title="Installing NPM/PNPM">
+
+``` bash apt 
+sudo apt install nodejs npm
+```
+Ensure that npm has been installed
+```bash npm
+npm -version
+```
+Installing pnpm 
+<CodeGroup>
+```bash npm
+npm install -g pnpm
+```
+```bash yarn
+yarn global add pnpm
+```
+</CodeGroup>
+Verifying pnpm has been installed
+```bash pnpm 
+pnpm -v
+```
+</Accordion>
+  <Accordion icon="rectangle-terminal" title="Installing Curl">
+```bash apt
+sudo apt-get install curl
+```
+Verifying curl has been installed
+```bash curl 
+curl -v
+```
+</Accordion>
+  <Accordion icon="rectangle-terminal" title="Installing PM2">
+```bash npm
+npm i -g pm2
+```
+```bash pm2
+pm2 -v 
+```
+</Accordion>
+    <Accordion icon="rectangle-terminal" title="Installing Caddy">
+    ```bash apt
+ apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+    ```
+        ```bash curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg 
+   ```
+        ```bash curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
+    ```
+        ```bash apt
+ apt update    
+ ```
+        ```bash apt
+apt install caddy
+    ```
+    
+</Accordion>
+</AccordionGroup>
+### Installation
+
+
+<AccordionGroup>
+  <Accordion icon="github" title="Clone our repository locally">
+
+```bash git
+git clone https://github.com/InterstellarNetwork/Interstellar
+```
+```bash cd 
+cd Interstellar
+```
+  </Accordion>
+  <Accordion icon="rectangle-terminal" title="Install Depenedices">
+  <CodeGroup>
+```bash npm
+npm install
+```
+```bash pnpm
+pnpm install
+```
+</CodeGroup>
+
+  </Accordion>
+    <Accordion icon="rocket" title="Start the site">
+  If you want to start the site scaled across all available cores then run the following:
+```bash pm2
+pm2 start index.js -i max
+```
+If you want to start a select number of processes, replace the number with your choice.
+```bash pnpm
+pnpm start index.js -i number
+```
+  </Accordion>
+</AccordionGroup>
+## Configuring Caddy
+This is how you add your domains to the server.
+

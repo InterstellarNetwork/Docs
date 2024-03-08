@@ -1,0 +1,47 @@
+---
+title: Local Installation
+description: 'Welcome to our official documentation!'
+---
+
+## Getting started
+
+Learn how to host the site locally and and deploy it to the public.
+
+Please ensure you have all prerequisites installed.
+      <Accordion icon="rectangle-terminal" title="Installing Node">
+Visit https://nodejs.org/en and download the reccomended version. 
+
+Open the installer and complete the installation.
+</Accordion>
+### Installation
+
+<AccordionGroup>
+  <Accordion icon="github" title="Clone our repository locally">
+Visit https://github.com/InterstellarNetwork/Interstellar/archive/refs/heads/main.zip and then once the download completes, extract the files. 
+
+Once the intallation is finished move onto the next step.
+  </Accordion>
+  <Accordion icon="rectangle-terminal" title="Install Depenedices">
+Press ⊞ Win + R, Type cmd, Click Enter
+
+Then run 
+```bash cd 
+cd Users\YOURUSERNAME\Downloads\Interstellar-main\Interstellar-main
+```
+Now run the following command to install the dependecies. 
+```bash npm
+npm install
+```
+
+  </Accordion>
+    <Accordion icon="rocket" title="Start the site">
+```bash npm
+npm run start
+``` 
+By default Interstellar runs on port 8080, if would like to change the port run the following command: 
+```bash npm 
+$env:PORT=3000; npm run start
+```
+
+  </Accordion>
+</AccordionGroup>
