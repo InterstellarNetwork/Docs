@@ -47,7 +47,7 @@
     {
       "group": "Get Started",
       "pages": [
-        "local",
+        "introduction",
         "server"
       ]
     },
