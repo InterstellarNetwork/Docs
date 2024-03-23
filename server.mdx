@@ -4,6 +4,9 @@ description: 'Welcome to our official documentation!'
 ---
 
 ## Getting started
+Huge thanks to @airtag for creating this tutorial (Modified by @xbubbo)
+
+Last updated: March 22nd, 2024.
 
 Learn how to host the site on your server and and deploy it to the public.
 
@@ -121,11 +124,83 @@ pnpm install
 pm2 start index.js -i max
 ```
 If you want to start a select number of processes, replace the number with your choice.
-```bash pnpm
-pnpm start index.js -i number
+```bash pm2
+pm2 start index.js -i number
+``` 
+If you don't do this and your VPS shuts down, you'll have to start Interstellar manually using the steps above.
+```bash pm2
+pm2 startup 
+```
+```bash pm2
+pm2 save 
 ```
   </Accordion>
 </AccordionGroup>
 ## Configuring Caddy
 This is how you add your domains to the server.
+<AccordionGroup>
+  <Accordion icon="rectangle-terminal" title="Edit the Caddyfile">
+This is a very simple way to add domains to your caddyfile.
+```bash nano
+nano /etc/caddy/Caddyfile
+```
+Hold down ctrl+k until the file is empty.
+  </Accordion>
+      <Accordion icon="rectangle-terminal" title="Pointing domains at your server">
+Create an A record on your domain pointing to your VPS's IP address. Usually, the name on the A record will be your subdomain. Make sure to add this into the Caddyfile below.
+</Accordion>
+    <Accordion icon="rocket" title="Adding domains">
+Make sure your domains are pointed at your server.
+Your Caddyfile should look something like this, of course replacing the domains in the first line with actual domains/subdomains.
+```bash nano 
 
+your-domain-here.com, 2nd-domain.com, 3rd.domain.com {
+reverse_proxy localhost:8080
+}
+```
+Save your Caddyfile by pressing Ctrl + X, then enter.
+Then run
+```bash systemctl
+ systemctl restart caddy
+```
+</Accordion>
+</AccordionGroup>
+## Firewall & Updating
+<AccordionGroup>
+    <Accordion icon="rocket" title="Setting up a firewall">
+    ```bash apt-get
+    apt-get install ufw
+```
+Run 
+```bash ufw
+ ufw allow 22
+ ```
+  If SSH is on another port, replace 22 with that port instead. This is mandatory, or you might lock yourself out of your VPS.
+```bash ufw
+ufw allow 443
+```
+If you have any other ports you need to allow, run 
+```bash ufw
+ufw allow port-number
+```
+```bash ufw 
+ufw enable
+```
+```bash ufw
+ufw reload
+```
+</Accordion>
+    <Accordion icon="rocket" title="Updating Interstellar">
+Make sure you are in the Interstellar directory
+```bash git
+git pull 
+```
+```bash pm2 
+pm2 restart all 
+```
+If you have multiple services running on pm2 and just want to restart Interstellar, find Interstellar's process ID and run
+```bash pm2 
+pm2 restart process-id 
+```
+</Accordion>
+</AccordionGroup>
